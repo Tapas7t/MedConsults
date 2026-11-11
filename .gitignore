@@ -1,11 +1,10 @@
 # Dependencies
 node_modules/
 
-# Environment & secrets - NEVER commit (only .env.example is allowed)
+# Environment & secrets - NEVER commit
 .env
 .env.*
-!.env.example
-.agents/mcp_config.json
+.env.example
 
 # Private keys and common secret filenames
 *.pem
@@ -15,9 +14,14 @@ id_ed25519
 *.p12
 *.pfx
 
-# Temporary & Test artifacts
+# Temporary & Internal non-production artifacts
 cookies.txt
 *.cookie
+instruction.md
+medconsults_prd.md
+.cursorignore
+.agents/
+backend/postman/collection.json
 
 # Build output
 dist/
