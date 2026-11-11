@@ -1,0 +1,30 @@
+{
+  "info": {
+    "name": "01. Health & Infra",
+    "description": "Medconsults API - 01. Health & Infra endpoints with sample request bodies.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET API Info (Root)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/"
+      }
+    },
+    {
+      "name": "GET Health Probe (Liveness)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "GET Ready Probe (Readiness / MongoDB)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/ready"
+      }
+    }
+  ]
+}

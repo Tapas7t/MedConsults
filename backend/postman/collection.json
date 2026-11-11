@@ -1,0 +1,883 @@
+{
+  "info": {
+    "name": "Medconsults API (Complete)",
+    "description": "Complete, category-wise Postman collection for Medconsults API per Blueprint v2.2 and PRD v2. Includes ready-to-test request bodies, headers, and automatic access token extraction.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Health & Infra",
+      "item": [
+        {
+          "name": "GET API Info (Root)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          }
+        },
+        {
+          "name": "GET Health Probe (Liveness)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        },
+        {
+          "name": "GET Ready Probe (Readiness / MongoDB)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ready"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Authentication",
+      "item": [
+        {
+          "name": "POST Register (Patient)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "  const res = pm.response.json();",
+                  "  if (res.data && res.data.accessToken) {",
+                  "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+                  "    console.log(\"Auto-saved accessToken to environment\");",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient_new@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"role\": \"patient\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/register"
+          }
+        },
+        {
+          "name": "POST Register (Doctor)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "  const res = pm.response.json();",
+                  "  if (res.data && res.data.accessToken) {",
+                  "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+                  "    console.log(\"Auto-saved accessToken to environment\");",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"doctor_new@clinic.com\",\n  \"password\": \"DoctorPass123!\",\n  \"role\": \"doctor\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/register"
+          }
+        },
+        {
+          "name": "POST Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "  const res = pm.response.json();",
+                  "  if (res.data && res.data.accessToken) {",
+                  "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+                  "    console.log(\"Auto-saved accessToken to environment\");",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"SecurePass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "POST Refresh Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "  const res = pm.response.json();",
+                  "  if (res.data && res.data.accessToken) {",
+                  "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+                  "    console.log(\"Auto-saved accessToken to environment\");",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/auth/refresh"
+          }
+        },
+        {
+          "name": "POST Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/auth/logout"
+          }
+        },
+        {
+          "name": "POST Verify Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"email_verification_token_here\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/verify-email"
+          }
+        },
+        {
+          "name": "POST Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient@example.com\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/forgot-password"
+          }
+        },
+        {
+          "name": "POST Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"password_reset_token_here\",\n  \"password\": \"BrandNewPassword123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/auth/reset-password"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03. Users & Family Dependents",
+      "item": [
+        {
+          "name": "GET My Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/users/me"
+          }
+        },
+        {
+          "name": "PATCH Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+919876543210\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/users/me"
+          }
+        },
+        {
+          "name": "GET Export My Data (Privacy / GDPR)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/users/me/export"
+          }
+        },
+        {
+          "name": "GET List Dependents (Family Members)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/users/me/dependents"
+          }
+        },
+        {
+          "name": "POST Create Dependent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Aarav Sharma\",\n  \"dob\": \"2018-05-14\",\n  \"relation\": \"Child\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/users/me/dependents"
+          }
+        },
+        {
+          "name": "PATCH Update Dependent",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Aarav Sharma (Updated)\",\n  \"relation\": \"Son\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/users/me/dependents/{{dependentId}}"
+          }
+        },
+        {
+          "name": "DELETE Dependent",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/users/me/dependents/{{dependentId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Public Discovery & Doctor Pages",
+      "item": [
+        {
+          "name": "GET Directory Search (Filters & Pagination)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/doctors?city=Bangalore&specialty=General Physician&page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "doctors"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Bangalore"
+                },
+                {
+                  "key": "specialty",
+                  "value": "General Physician"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Doctor Public Page by Slug",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/doctors/by-slug/{{doctorSlug}}"
+          }
+        },
+        {
+          "name": "GET Doctor Available Slots",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/doctors/{{doctorId}}/slots?from=2026-11-15&to=2026-11-22",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "doctors",
+                "{{doctorId}}",
+                "slots"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-11-15"
+                },
+                {
+                  "key": "to",
+                  "value": "2026-11-22"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Doctor Practice Management",
+      "item": [
+        {
+          "name": "GET Doctor Profile & Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/profile"
+          }
+        },
+        {
+          "name": "PATCH Update Doctor & Clinic Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Ananya Roy\",\n  \"type\": \"doctor\",\n  \"specialty\": \"General Physician\",\n  \"qualifications\": \"MBBS, MD\",\n  \"licenceNo\": \"MED-KA-2024-9988\",\n  \"experienceYears\": 12,\n  \"languages\": [\n    \"English\",\n    \"Hindi\",\n    \"Kannada\"\n  ],\n  \"bio\": \"Dedicated physician specializing in preventative medicine and family wellness.\",\n  \"fee\": 600,\n  \"slotMinutes\": 30,\n  \"leadTimeMin\": 60,\n  \"horizonDays\": 30,\n  \"cancelWindowHours\": 4,\n  \"autoConfirm\": true,\n  \"listedInDirectory\": true,\n  \"clinic\": {\n    \"name\": \"Roy Wellness Clinic\",\n    \"address\": \"Suite 401, Health Hub, 100 Feet Rd, Indiranagar\",\n    \"area\": \"Indiranagar\",\n    \"city\": \"Bangalore\",\n    \"postalCode\": \"560038\",\n    \"phone\": \"+918023456789\",\n    \"timezone\": \"Asia/Kolkata\",\n    \"notes\": \"Free parking behind the building; elevator accessible.\"\n  }\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/doctor/profile"
+          }
+        },
+        {
+          "name": "POST Submit Profile for Admin Approval",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/profile/submit"
+          }
+        },
+        {
+          "name": "GET Weekly Availability & Exceptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/availability"
+          }
+        },
+        {
+          "name": "PUT Update Weekly Availability & Schedule",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"weekly\": [\n    {\n      \"day\": \"monday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"tuesday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"wednesday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"thursday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"friday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"saturday\",\n      \"ranges\": [\n        {\n          \"start\": \"10:00\",\n          \"end\": \"14:00\"\n        }\n      ],\n      \"breaks\": []\n    }\n  ],\n  \"exceptions\": [\n    {\n      \"date\": \"2026-12-25\",\n      \"isClosed\": true\n    }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/doctor/availability"
+          }
+        },
+        {
+          "name": "GET Schedule Blocks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/blocks"
+          }
+        },
+        {
+          "name": "POST Create Manual Schedule Block",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startAt\": \"2026-11-20T08:00:00.000Z\",\n  \"endAt\": \"2026-11-20T12:00:00.000Z\",\n  \"reason\": \"Emergency clinic maintenance / conference\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/doctor/blocks"
+          }
+        },
+        {
+          "name": "DELETE Schedule Block",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/blocks/{{blockId}}"
+          }
+        },
+        {
+          "name": "GET Today's Doctor Appointments Queue",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/doctor/appointments?date=2026-11-20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "doctor",
+                "appointments"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-11-20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Add Walk-In Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patientName\": \"Rohan Verma (Walk-in)\",\n  \"phone\": \"+919812345678\",\n  \"startAt\": \"2026-11-20T10:00:00.000Z\",\n  \"reason\": \"Acute migraine consultation\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/doctor/appointments/walkin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "06. Appointments Lifecycle & Notes",
+      "item": [
+        {
+          "name": "POST Book Slot (Transactional with Overlap Guard)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctorId\": \"{{doctorId}}\",\n  \"startAt\": \"2026-11-20T04:30:00.000Z\",\n  \"patientType\": \"self\",\n  \"reason\": \"Routine health screening and blood pressure checkup\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/appointments"
+          }
+        },
+        {
+          "name": "GET My Appointments (Upcoming & Past)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/appointments"
+          }
+        },
+        {
+          "name": "GET Appointment Detail by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/appointments/{{appointmentId}}"
+          }
+        },
+        {
+          "name": "PATCH Update Status (arrived / completed / cancelled / no_show)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"arrived\",\n  \"reason\": \"Patient checked in at reception\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/appointments/{{appointmentId}}/status"
+          }
+        },
+        {
+          "name": "POST Reschedule Appointment (Atomic)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newStartAt\": \"2026-11-21T05:00:00.000Z\",\n  \"reason\": \"Patient requested next day slot\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/appointments/{{appointmentId}}/reschedule"
+          }
+        },
+        {
+          "name": "PUT Consultation Notes (AES-256 Encrypted at Rest)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"BP: 120/80 mmHg. Normal heart sounds. Advised lifestyle modifications, low sodium diet, and repeat follow-up in 30 days.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/appointments/{{appointmentId}}/notes"
+          }
+        },
+        {
+          "name": "GET iCalendar File (.ics Download)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/appointments/{{appointmentId}}/calendar.ics"
+          }
+        }
+      ]
+    },
+    {
+      "name": "07. Doctor CRM & Patient Records",
+      "item": [
+        {
+          "name": "GET Patient List (Visit Counts & History)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/patients"
+          }
+        },
+        {
+          "name": "GET Patient Detail & Clinical History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/doctor/patients/{{patientUserId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "08. Admin Moderation & Platform Stats",
+      "item": [
+        {
+          "name": "GET Doctor Approval Queue",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/doctors?status=pending_approval",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "doctors"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending_approval"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Approve / Reject Doctor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admin/doctors/{{doctorId}}/status"
+          }
+        },
+        {
+          "name": "GET Platform Users List (Search & Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/users?role=patient",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "role",
+                  "value": "patient"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Block / Unblock User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isBlocked\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admin/users/{{targetUserId}}/block"
+          }
+        },
+        {
+          "name": "GET Platform Counters & Metrics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/admin/stats"
+          }
+        }
+      ]
+    }
+  ]
+}

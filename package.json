@@ -1,0 +1,16 @@
+{
+  "name": "medconsults",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Medconsults Monorepo Root",
+  "scripts": {
+    "dev": "npm run dev --prefix backend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:worker": "npm run worker --prefix backend",
+    "build:backend": "npm run build --prefix backend",
+    "test:backend": "npm test --prefix backend",
+    "test:e2e": "npm run test:e2e --prefix backend",
+    "test:api": "node .agents/skills/medconsults-api/scripts/test-api.js",
+    "postman:sync": "node .agents/skills/medconsults-api/scripts/sync-postman.js"
+  }
+}

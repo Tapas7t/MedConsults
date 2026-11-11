@@ -1,0 +1,188 @@
+{
+  "info": {
+    "name": "05. Doctor Practice Management",
+    "description": "Medconsults API - 05. Doctor Practice Management endpoints with sample request bodies.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Doctor Profile & Settings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/profile"
+      }
+    },
+    {
+      "name": "PATCH Update Doctor & Clinic Profile",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Ananya Roy\",\n  \"type\": \"doctor\",\n  \"specialty\": \"General Physician\",\n  \"qualifications\": \"MBBS, MD\",\n  \"licenceNo\": \"MED-KA-2024-9988\",\n  \"experienceYears\": 12,\n  \"languages\": [\n    \"English\",\n    \"Hindi\",\n    \"Kannada\"\n  ],\n  \"bio\": \"Dedicated physician specializing in preventative medicine and family wellness.\",\n  \"fee\": 600,\n  \"slotMinutes\": 30,\n  \"leadTimeMin\": 60,\n  \"horizonDays\": 30,\n  \"cancelWindowHours\": 4,\n  \"autoConfirm\": true,\n  \"listedInDirectory\": true,\n  \"clinic\": {\n    \"name\": \"Roy Wellness Clinic\",\n    \"address\": \"Suite 401, Health Hub, 100 Feet Rd, Indiranagar\",\n    \"area\": \"Indiranagar\",\n    \"city\": \"Bangalore\",\n    \"postalCode\": \"560038\",\n    \"phone\": \"+918023456789\",\n    \"timezone\": \"Asia/Kolkata\",\n    \"notes\": \"Free parking behind the building; elevator accessible.\"\n  }\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/doctor/profile"
+      }
+    },
+    {
+      "name": "POST Submit Profile for Admin Approval",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/profile/submit"
+      }
+    },
+    {
+      "name": "GET Weekly Availability & Exceptions",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/availability"
+      }
+    },
+    {
+      "name": "PUT Update Weekly Availability & Schedule",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"weekly\": [\n    {\n      \"day\": \"monday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"tuesday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"wednesday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"thursday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"friday\",\n      \"ranges\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"13:00\"\n        },\n        {\n          \"start\": \"14:00\",\n          \"end\": \"18:00\"\n        }\n      ],\n      \"breaks\": [\n        {\n          \"start\": \"13:00\",\n          \"end\": \"14:00\"\n        }\n      ]\n    },\n    {\n      \"day\": \"saturday\",\n      \"ranges\": [\n        {\n          \"start\": \"10:00\",\n          \"end\": \"14:00\"\n        }\n      ],\n      \"breaks\": []\n    }\n  ],\n  \"exceptions\": [\n    {\n      \"date\": \"2026-12-25\",\n      \"isClosed\": true\n    }\n  ]\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/doctor/availability"
+      }
+    },
+    {
+      "name": "GET Schedule Blocks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/blocks"
+      }
+    },
+    {
+      "name": "POST Create Manual Schedule Block",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"startAt\": \"2026-11-20T08:00:00.000Z\",\n  \"endAt\": \"2026-11-20T12:00:00.000Z\",\n  \"reason\": \"Emergency clinic maintenance / conference\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/doctor/blocks"
+      }
+    },
+    {
+      "name": "DELETE Schedule Block",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/blocks/{{blockId}}"
+      }
+    },
+    {
+      "name": "GET Today's Doctor Appointments Queue",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctor/appointments?date=2026-11-20",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctor",
+            "appointments"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "2026-11-20"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST Add Walk-In Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"patientName\": \"Rohan Verma (Walk-in)\",\n  \"phone\": \"+919812345678\",\n  \"startAt\": \"2026-11-20T10:00:00.000Z\",\n  \"reason\": \"Acute migraine consultation\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/doctor/appointments/walkin"
+      }
+    }
+  ]
+}

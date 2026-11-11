@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "02. Authentication",
+    "description": "Medconsults API - 02. Authentication endpoints with sample request bodies.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST Register (Patient)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "  const res = pm.response.json();",
+              "  if (res.data && res.data.accessToken) {",
+              "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+              "    console.log(\"Auto-saved accessToken to environment\");",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"patient_new@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"role\": \"patient\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/register"
+      }
+    },
+    {
+      "name": "POST Register (Doctor)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "  const res = pm.response.json();",
+              "  if (res.data && res.data.accessToken) {",
+              "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+              "    console.log(\"Auto-saved accessToken to environment\");",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"doctor_new@clinic.com\",\n  \"password\": \"DoctorPass123!\",\n  \"role\": \"doctor\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/register"
+      }
+    },
+    {
+      "name": "POST Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "  const res = pm.response.json();",
+              "  if (res.data && res.data.accessToken) {",
+              "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+              "    console.log(\"Auto-saved accessToken to environment\");",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"SecurePass123!\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/login"
+      }
+    },
+    {
+      "name": "POST Refresh Access Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "  const res = pm.response.json();",
+              "  if (res.data && res.data.accessToken) {",
+              "    pm.environment.set(\"accessToken\", res.data.accessToken);",
+              "    console.log(\"Auto-saved accessToken to environment\");",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/v1/auth/refresh"
+      }
+    },
+    {
+      "name": "POST Logout",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/v1/auth/logout"
+      }
+    },
+    {
+      "name": "POST Verify Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"email_verification_token_here\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/verify-email"
+      }
+    },
+    {
+      "name": "POST Forgot Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"patient@example.com\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/forgot-password"
+      }
+    },
+    {
+      "name": "POST Reset Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"password_reset_token_here\",\n  \"password\": \"BrandNewPassword123!\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/reset-password"
+      }
+    }
+  ]
+}

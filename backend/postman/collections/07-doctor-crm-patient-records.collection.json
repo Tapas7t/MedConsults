@@ -1,0 +1,35 @@
+{
+  "info": {
+    "name": "07. Doctor CRM & Patient Records",
+    "description": "Medconsults API - 07. Doctor CRM & Patient Records endpoints with sample request bodies.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Patient List (Visit Counts & History)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/patients"
+      }
+    },
+    {
+      "name": "GET Patient Detail & Clinical History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/doctor/patients/{{patientUserId}}"
+      }
+    }
+  ]
+}

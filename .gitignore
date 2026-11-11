@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets - NEVER commit (only .env.example is allowed)
+.env
+.env.*
+!.env.example
+.agents/mcp_config.json
+
+# Private keys and common secret filenames
+*.pem
+*.key
+id_rsa
+id_ed25519
+*.p12
+*.pfx
+
+# Temporary & Test artifacts
+cookies.txt
+*.cookie
+
+# Build output
+dist/
+build/
+out/
+.next/
+*.tsbuildinfo
+
+# Logs & coverage
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+.nyc_output/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

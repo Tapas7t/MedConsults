@@ -1,0 +1,80 @@
+{
+  "info": {
+    "name": "04. Public Discovery & Doctor Pages",
+    "description": "Medconsults API - 04. Public Discovery & Doctor Pages endpoints with sample request bodies.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Directory Search (Filters & Pagination)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors?city=Bangalore&specialty=General Physician&page=1&limit=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors"
+          ],
+          "query": [
+            {
+              "key": "city",
+              "value": "Bangalore"
+            },
+            {
+              "key": "specialty",
+              "value": "General Physician"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET Doctor Public Page by Slug",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/doctors/by-slug/{{doctorSlug}}"
+      }
+    },
+    {
+      "name": "GET Doctor Available Slots",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors/{{doctorId}}/slots?from=2026-11-15&to=2026-11-22",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            "{{doctorId}}",
+            "slots"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "2026-11-15"
+            },
+            {
+              "key": "to",
+              "value": "2026-11-22"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
