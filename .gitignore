@@ -22,6 +22,7 @@ medconsults_prd.md
 .cursorignore
 .agents/
 backend/postman/collection.json
+frontend/
 
 # Build output
 dist/
