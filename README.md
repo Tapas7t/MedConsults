@@ -25,34 +25,33 @@ Built per **Medconsults PRD v2** and **Full-Stack Project Blueprint v2.2**.
 ```
 ├── backend/            # Express + TypeScript API + Worker
 │   ├── src/            # Modular backend source code
-│   └── postman/        # Postman collections & environment
+│   ├── tests/          # 44-endpoint E2E & concurrency test suites
+│   └── postman/        # Postman category collections & environment
 ├── docs/               # Complete Project & API Documentation
 │   ├── API_DOCUMENTATION.md          # Full endpoint catalog, schemas, scenarios & error codes
 │   └── DEVELOPER_HANDOVER_GUIDE.md   # Architectural decisions, data models & onboarding guide
-├── .agents/skills/     # Antigravity automation skills & runbooks
 ├── frontend/           # Next.js App Router Client (Phase 2)
-├── instruction.md      # Blueprint v2.2 guidelines
-└── medconsults_prd.md  # PRD v2 specification
+├── RULES.md            # Mandatory project engineering & documentation rules
+└── README.md           # Project overview and quick start guide
 ```
 
 ## Documentation & Runbooks
 
 * 📖 **[API Documentation](docs/API_DOCUMENTATION.md)**: Complete endpoint catalog, schemas, multi-scenario lifecycle flows, and error taxonomy.
 * 🛠️ **[Developer Handover Guide](docs/DEVELOPER_HANDOVER_GUIDE.md)**: Architecture diagrams, ADRs, database collections, environment variable matrix, and handover notes.
-* 📋 **[Project Rules](RULES.md)**: Mandatory automatic API documentation and Postman sync rules.
+* 📋 **[Project Rules](RULES.md)**: Mandatory automatic API documentation and testing rules.
 
 ## Quick Start (Backend)
 
 1. `cd backend`
 2. `npm install`
-3. Check `.env` settings (MongoDB URI, JWT secrets, Encryption keys)
+3. Configure `backend/.env` (see [Environment Variables Matrix](docs/DEVELOPER_HANDOVER_GUIDE.md#4-environment-variables-matrix-backendenv))
 4. Run development server:
    ```bash
    npm run dev
    ```
-5. Run tests & Postman sync from project root:
+5. Run automated test suites:
    ```bash
-   npm run test:api       # Automated end-to-end API verification suite
+   npm run test:e2e       # Full 44-endpoint automated verification suite
    npm run test:backend   # Security & concurrency simulation tests
-   npm run postman:sync   # Synchronize collections directly to Postman
    ```

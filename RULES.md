@@ -17,15 +17,14 @@ Every API change must be reflected in [docs/API_DOCUMENTATION.md](docs/API_DOCUM
 - If any new environment variable is introduced, add it to the **Environment Variables Matrix** (`.env`).
 - If a core architectural invariant or business rule changes, record it under **Architectural Decision Records (ADRs)**.
 
-### 3. Update Postman Collections & Skill Reference
+### 3. Update Postman Collections
 - Update the relevant standalone category collection under `backend/postman/collections/`.
-- Update the quick-reference cheat sheet in `.agents/skills/medconsults-api/references/endpoints.md`.
-- Run `npm run postman:sync` to push updated collections and environment variables to the active Postman workspace (`medconsults`).
+- Ensure new endpoints, headers, and request/response examples are updated in their category collection.
 
 ### 4. Verification Check
 After making changes to APIs and documentation, run:
 ```bash
-npm run test:api       # Verify live endpoints pass automated tests
+npm run test:e2e       # Verify all 44 endpoints pass automated scenario tests
 npm run test:backend   # Verify security and concurrency guards pass
 ```
 Never mark a task complete if code and documentation are out of sync.
